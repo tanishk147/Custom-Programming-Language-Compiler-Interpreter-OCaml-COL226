@@ -1,0 +1,10 @@
+{
+  // Fix the format of the demo file (convert comma to space in dimensions)
+  Print("Testing matrix from Demo_input_files/t1_A.txt");
+  matrix[6][6] A := read_matrix("Demo_input_files/t1_A.txt", 6, 6);
+  Print(A);
+  Print("Determinant:"); 
+  Print(determinant A);
+  Print("Transpose:");
+  Print(A');
+}

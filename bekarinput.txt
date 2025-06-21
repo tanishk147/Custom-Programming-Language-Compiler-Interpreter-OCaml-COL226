@@ -1,0 +1,344 @@
+// Comprehensive test for the matrix language interpreter
+
+// Basic variable declarations with different types
+int x := 10;
+float y := 2.5;
+bool z := false;
+
+// Basic arithmetic operations
+int a := x + 5;       // 15
+int b := x - 3;       // 7
+int c := x * 2;       // 20
+int d := x / 3;       // 3 (integer division)
+int e := x % 3;       // 1 (modulo)
+
+// Print the results
+Print(a);             // Output: 15
+Print(b);             // Output: 7
+Print(c);             // Output: 20
+Print(d);             // Output: 3
+Print(e);             // Output: 1
+
+// Float operations
+float f := y + 0.5;   // 3.0
+float g := y * 4.0;   // 10.0
+float h := y / 0.5;   // 5.0
+
+Print(f);             // Output: 3.0
+Print(g);             // Output: 10.0
+Print(h);             // Output: 5.0
+
+// Mixed type operations
+float i := x + y;     // 12.5
+float j := x * y;     // 25.0
+Print(i);             // Output: 12.5
+Print(j);             // Output: 25.0
+
+// Boolean operations
+bool b1 := true and false;  // false
+bool b2 := true or false;   // true
+bool b3 := not z;           // true
+
+Print(b1);            // Output: false
+Print(b2);            // Output: true
+Print(b3);            // Output: true
+
+// Comparison operations
+bool cmp1 := x > 5;          // true
+bool cmp2 := y <= 2.5;       // true
+bool cmp3 := x = 10;         // true
+bool cmp4 := y = 3.0;        // false
+
+Print(cmp1);          // Output: true
+Print(cmp2);          // Output: true
+Print(cmp3);          // Output: true
+Print(cmp4);          // Output: false
+
+// Vector operations
+vector[4] v1 := [1, 2, 3, 4];
+vector[4] v2 := [5, 6, 7, 8];
+vector[4] v3 := v1 + v2;     // [6, 8, 10, 12]
+float dot_result := v1 . v2; // 70 (1*5 + 2*6 + 3*7 + 4*8)
+
+Print(v1);            // Output: [1, 2, 3, 4]
+Print(v2);            // Output: [5, 6, 7, 8]
+Print(v3);            // Output: [6, 8, 10, 12]
+Print(dot_result);    // Output: 70.0
+
+// Vector indexing
+float v1_element := v1[2];  // 3
+Print(v1_element);   // Output: 3.0
+
+// Matrix operations
+matrix[3][3] m1 := [[1, 2, 3]; [4, 5, 6]; [7, 8, 9]];
+matrix[3][3] m2 := [[9, 8, 7]; [6, 5, 4]; [3, 2, 1]];
+matrix[3][3] m_sum := m1 + m2;  // Each element is sum of corresponding elements
+
+Print(m1);            // Output: [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+Print(m2);            // Output: [[9, 8, 7], [6, 5, 4], [3, 2, 1]]
+Print(m_sum);         // Output: [[10, 10, 10], [10, 10, 10], [10, 10, 10]]
+
+// Matrix element access
+float m1_element := m1[1][2];  // 6
+Print(m1_element);   // Output: 6.0
+
+// Matrix multiplication
+matrix[2][3] mat1 := [[1, 2, 3]; [4, 5, 6]];
+matrix[3][2] mat2 := [[7, 8]; [9, 10]; [11, 12]];
+matrix[2][2] mat_mul := mat1 * mat2;  // Matrix multiplication
+
+Print(mat1);          // Output: [[1, 2, 3], [4, 5, 6]]
+Print(mat2);          // Output: [[7, 8], [9, 10], [11, 12]]
+Print(mat_mul);       // Output: [[58, 64], [139, 154]]
+
+// Matrix-vector multiplication
+matrix[2][3] m_for_v := [[1, 2, 3]; [4, 5, 6]];
+vector[3] v_for_m := [7, 8, 9];
+vector[2] mv_result := m_for_v * v_for_m;  // [50, 122]
+
+Print(m_for_v);       // Output: [[1, 2, 3], [4, 5, 6]]
+Print(v_for_m);       // Output: [7, 8, 9]
+Print(mv_result);     // Output: [50, 122]
+
+// Matrix transpose
+matrix[2][3] m_to_transpose := [[1, 2, 3]; [4, 5, 6]];
+// matrix[3][2] m_transposed := m_to_transpose';  // Transpose
+
+Print(m_to_transpose);  // Output: [[1, 2, 3], [4, 5, 6]]
+//Print(m_transposed);   // Output: [[1, 4], [2, 5], [3, 6]]
+
+// Determinant of 2x2 matrix
+matrix[2][2] m_det := [[4, 7]; [2, 6]];
+float det_result := determinant m_det;  // 4*6 - 7*2 = 24 - 14 = 10
+
+Print(m_det);         // Output: [[4, 7], [2, 6]]
+Print(det_result);    // Output: 10.0
+
+// Determinant of 3x3 matrix
+matrix[3][3] m_det3 := [[1, 2, 3]; [4, 5, 6]; [7, 8, 10]];
+float det_result3 := determinant m_det3;  // Should be -3
+
+Print(m_det3);        // Output: [[1, 2, 3], [4, 5, 6], [7, 8, 10]]
+Print(det_result3);   // Output: -3.0
+
+// Control structures - If statements
+if x > 5 then {
+    Print("x is greater than 5");  // This will execute
+} else {
+    Print("x is not greater than 5");
+}
+
+// Nested if statements
+if x > 15 then {
+    Print("x is greater than 15");
+} else if x > 5 then {
+    Print("x is greater than 5 but not greater than 15");  // This will execute
+} else {
+    Print("x is not greater than 5");
+}
+
+// For loop
+for i := 1 to 5 do {
+    Print(i);  // Output: 1, 2, 3, 4, 5
+}
+
+// While loop
+int w := 5;
+while w > 0 do {
+    Print(w);  // Output: 5, 4, 3, 2, 1
+    w := w - 1;
+}
+
+// Nested loops
+for i := 1 to 3 do {
+    for j := 1 to 2 do {
+        Print(i * 10 + j);  // Output: 11, 12, 21, 22, 31, 32
+    }
+}
+
+// Testing variable scoping in loops
+int loop_var := 0;
+for i := 1 to 3 do {
+    loop_var := loop_var + i;
+}
+Print(loop_var);  // Output: 6 (1+2+3)
+
+// Testing more complex expressions
+int complex_expr := (a + b) * (c - d);  // (15 + 7) * (20 - 3) = 22 * 17 = 374
+Print(complex_expr);  // Output: 374
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Matrix operations and determinants
+{
+    matrix[3][3] A := [[1, 2, 3]; [4, 5, 6]; [7, 8, 9]];
+    matrix[3][3] inverseA := [[0, 0, 0]; [0, 0, 0]; [0, 0, 0]];
+    
+    if determinant A <> 0.0 then {
+        matrix[3][3] cofactor_matrix := [[0, 0, 0]; [0, 0, 0]; [0, 0, 0]];
+        
+        int i := 0;
+        while i < 3 do {
+            int j := 0;
+            while j < 3 do {
+                // Extract submatrix and calculate determinant
+                matrix[2][2] minormat;
+                if i = 0 and j = 0 then {
+                    minormat[0][0] := A[1][1];
+                    minormat[0][1] := A[1][2];
+                    minormat[1][0] := A[2][1];
+                    minormat[1][1] := A[2][2];
+                }
+                
+                cofactor_matrix[i][j] := (-1.0) * determinant minormat;
+                j := j + 1;
+            }
+            i := i + 1;
+        }
+        
+        // Manual transpose
+        matrix[3][3] adjoint_of_matrix;
+        i := 0;
+        while i < 3 do {
+            int j := 0;
+            while j < 3 do {
+                adjoint_of_matrix[j][i] := cofactor_matrix[i][j];
+                j := j + 1;
+            }
+            i := i + 1;
+        }
+        
+        // Scale by 1/det(A)
+        float det_A := determinant A;
+        i := 0;
+        while i < 3 do {
+            int j := 0;
+            while j < 3 do {
+                inverseA[i][j] := (1.0/det_A) * adjoint_of_matrix[i][j];
+                j := j + 1;
+            }
+            i := i + 1;
+        }
+    } else {
+        Print(0);  // Matrix not invertible
+    }
+
+    // Matrix operations
+    matrix[2][2] mat2 := [[1, 2]; [3, 0]];
+    float trace := mat2[0][0] + mat2[1][1];
+    float detmat2 := determinant mat2;
+    float D := trace*trace - 4.0 * detmat2;
+    
+    if D >= 0.0 then {
+        float egv1 := (trace + D) / 2.0;
+        float egv2 := (trace - D) / 2.0;
+        Print(egv1);
+        Print(egv2);
+    } else {
+        Print(0);  // Complex eigenvalues
+    }
+
+    // Matrix vector multiplication
+    matrix[2][2] A2 := [[1, 2]; [3, 4]];
+    vector[2] x := [5, 6];
+    vector[2] result := A2 * x;
+    Print(result);  // Should output [17, 39]
+
+    // Testing for loops with matrices
+    matrix[3][3] sumMatrix := [[0, 0, 0]; [0, 0, 0]; [0, 0, 0]];
+    int i := 0;
+    while i < 3 do {
+        int j := 0;
+        while j < 3 do {
+            sumMatrix[i][j] := i + j;
+            j := j + 1;
+        }
+        i := i + 1;
+    }
+    Print(sumMatrix);
+
+    // Testing while loops
+    int counter := 10;
+    while counter > 0 do {
+        Print(counter);
+        counter := counter - 1;
+    }
+}
+
+// Mixed operations
+{
+    // Integer operations
+    int i1 := -1;
+    int i2 := 0;
+    int i3 := 10000;
+    int i4 := -1+4;
+    i4 := -i3; 
+    
+    i1 := 5+-9;
+    i1 := 6/-9*5;
+    i1 := 6*-9+5;
+    i1 := 6*-(9+5);
+    
+    // Comparison operations
+    bool b := i1 = i2;
+    b := (i1 = i2) = true;
+    b := (i1 = i2) <> true;
+    b := (i1 < i2);
+    b := (i1 <= i2);
+    b := i1 >= i2;
+    b := i1 > i2;
+    i4 := i3%(i2+1);  // Avoid division by zero
+
+    // Float operations
+    float f1 := -1.0;
+    float f2 := 1.0;
+    f2 := 1.;
+    
+    f2 := f2 + f1;
+    f2 := 2.0*f1;
+
+    // Boolean operations
+    bool b1 := not true;
+    bool b2 := b1 or true;
+    b2 := b1 and b2;
+    b1 := b1 or b2 or b1;
+    b2 := b1 and b2 or (i1 = i2);
+    
+    // Vector operations
+    vector[3] vi1 := [1, 2, 3];   
+    vector[3] vi2 := [4, 5, 6];
+    vector[3] vi3 := vi1 + vi2;
+    Print(vi3);  // Should output [5, 7, 9]
+    
+    // Dot product
+    float dot_result := vi1 . vi2;
+    Print(dot_result);  // Should output 32
+    
+    // Matrix operations
+    matrix[3][3] m1 := [[1, 2, 3]; [4, 5, 6]; [7, 8, 9]];
+    matrix[3][3] m2 := [[9, 8, 7]; [6, 5, 4]; [3, 2, 1]];
+    matrix[3][3] m_sum := m1 + m2;
+    Print(m_sum);  // Should output all 10s
+    
+    // Matrix multiplication
+    matrix[2][3] mat1 := [[1, 2, 3]; [4, 5, 6]];
+    matrix[3][2] mat2 := [[7, 8]; [9, 10]; [11, 12]];
+    matrix[2][2] mat_product := mat1 * mat2;
+    Print(mat_product);  // Should output [[58, 64]; [139, 154]]
+}
